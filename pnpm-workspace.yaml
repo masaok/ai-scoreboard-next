@@ -1,6 +1,9 @@
-allowBuilds:
-  sharp: true
-  unrs-resolver: true
+onlyBuiltDependencies:
+  - esbuild
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+# A global ~/.config/pnpm/rc restricts builds to a single package, which makes
+# pnpm 11's pre-run deps check refuse to run scripts here. esbuild works without
+# its optional postinstall, so skip that gate for `pnpm run`.
+verifyDepsBeforeRun: false

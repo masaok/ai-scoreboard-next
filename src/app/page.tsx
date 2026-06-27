@@ -1,5 +1,8 @@
-import { MODELS } from "@/lib/models";
-import { compositeScore } from "@/lib/score";
+import { getRankedModels } from "@/lib/db/queries";
+
+// Regenerate the leaderboard at most once a minute (ISR) instead of on every
+// request — fresh enough for a leaderboard, cheap on DB round-trips.
+export const revalidate = 60;
 
 const DIMENSIONS = [
   { key: "reasoning", label: "Reasoning" },
@@ -52,9 +55,8 @@ function Bar({ value }: { value: number }) {
   );
 }
 
-export default function Home() {
-  const ranked = MODELS.map((m) => ({ ...m, total: compositeScore(m.scores) }))
-    .sort((a, b) => b.total - a.total);
+export default async function Home() {
+  const ranked = await getRankedModels();
   const leader = ranked[0];
 
   return (

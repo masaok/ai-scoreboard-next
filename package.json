@@ -10,9 +10,13 @@
     "tsc": "tsc --noEmit",
     "test": "jest",
     "ci": "pnpm run tsc && pnpm run lint && pnpm run test",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx src/lib/db/seed.ts",
     "prepare": "husky"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "drizzle-orm": "^0.45.2",
     "next": "16.2.9",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -24,12 +28,15 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "rulesync-cli": "^0.1.60",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   },
   "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
