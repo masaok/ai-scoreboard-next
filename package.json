@@ -10,7 +10,8 @@
     "tsc": "tsc --noEmit",
     "test": "jest",
     "ci": "pnpm run tsc && pnpm run lint && pnpm run test",
-    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx src/lib/db/seed.ts",
     "prepare": "husky"
   },
