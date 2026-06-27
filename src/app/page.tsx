@@ -142,8 +142,8 @@ export default async function Home() {
         <div className="mb-8 flex flex-col gap-1">
           <h2 className="text-2xl font-semibold tracking-tight">The Scoreboard</h2>
           <p className="text-zinc-600 dark:text-zinc-400">
-            Ranked by composite rating. Sample data shown — wired to live Neon
-            Postgres in the full app.
+            Ranked by composite rating, served live from Neon Postgres and
+            refreshed every minute.
           </p>
         </div>
 
