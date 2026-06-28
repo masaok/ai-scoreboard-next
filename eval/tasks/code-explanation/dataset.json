@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ce-01",
+    "prompt": "Explain what this function does:\n\nfunction f(s) { return s.split('').reverse().join(''); }",
+    "keywords": ["reverse", "string"]
+  },
+  {
+    "id": "ce-02",
+    "prompt": "Explain what this function does:\n\nfunction d(fn, wait) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), wait);\n  };\n}",
+    "keywords": ["debounce", "delay", "timeout"]
+  },
+  {
+    "id": "ce-03",
+    "prompt": "Explain what this function does:\n\nfunction b(a, x) {\n  let lo = 0, hi = a.length - 1;\n  while (lo <= hi) {\n    const m = (lo + hi) >> 1;\n    if (a[m] === x) return m;\n    if (a[m] < x) lo = m + 1; else hi = m - 1;\n  }\n  return -1;\n}",
+    "keywords": ["binary", "sorted", "half"]
+  },
+  {
+    "id": "ce-04",
+    "prompt": "Explain what this function does:\n\nfunction m(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (cache.has(n)) return cache.get(n);\n    const r = fn(n);\n    cache.set(n, r);\n    return r;\n  };\n}",
+    "keywords": ["memo", "cache", "closure"]
+  }
+]

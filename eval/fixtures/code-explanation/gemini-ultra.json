@@ -1,0 +1,9 @@
+{
+  "ce-01": { "output": "This reverses a string: it breaks the string into characters, reverses them, and joins back into a string." },
+  "ce-02": { "output": "A debounce function — it waits for a pause of `wait` ms (a delay) after the last call before invoking fn, resetting its timeout each time." },
+  "ce-03": { "output": "Binary search: on a sorted array it checks the middle and discards half the range each step until it finds the target or returns -1." },
+  "ce-04": {
+    "output": "A memoization helper. It stores computed results in a cache (a Map) and returns the cached value whenever the same input is requested again.",
+    "analysis": "Correctly identified memoization and the cache, but never mentioned that the cache lives in a closure — the very mechanism that lets it persist across calls. Keyword coverage fell to 2/3, below the 70% bar. The explanation is right but omits the 'why it works' detail."
+  }
+}

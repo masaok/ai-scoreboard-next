@@ -1,0 +1,530 @@
+{
+  "generatedAt": "2026-06-28",
+  "outputsAreFixtures": true,
+  "models": [
+    {
+      "id": "opus-4-8",
+      "name": "Claude Opus 4.8",
+      "vendor": "Anthropic",
+      "accent": "from-orange-400 to-rose-500"
+    },
+    {
+      "id": "gpt-frontier",
+      "name": "GPT Frontier",
+      "vendor": "OpenAI",
+      "accent": "from-emerald-400 to-teal-500"
+    },
+    {
+      "id": "gemini-ultra",
+      "name": "Gemini Ultra",
+      "vendor": "Google",
+      "accent": "from-sky-400 to-indigo-500"
+    }
+  ],
+  "tasks": [
+    {
+      "slug": "sql-generation",
+      "title": "SQL Generation",
+      "summary": "Generate SQL for a natural-language question against a fixed schema. Graded by executing the SQL and comparing result rows to a reference query.",
+      "tier": "deterministic",
+      "tierDetail": "Deterministic: the generated SQL is run against an in-memory SQLite database seeded from a known schema, and its result set is compared (row-for-row) to the reference query's result. No LLM judges the answer."
+    },
+    {
+      "slug": "code-explanation",
+      "title": "Code Explanation",
+      "summary": "Explain what a short function does. Graded by keyword coverage against a reference set of concepts the explanation must mention.",
+      "tier": "reference",
+      "tierDetail": "Reference-based: the explanation is scored on the fraction of required concept keywords it mentions (case-insensitive). It passes at ≥70% coverage. Weaker than execution, but objective and judge-free."
+    },
+    {
+      "slug": "doc-extraction",
+      "title": "Document Extraction",
+      "summary": "Extract named fields from a short document as JSON. Graded by field-level F1 against an exact expected object.",
+      "tier": "reference",
+      "tierDetail": "Reference-based: the returned JSON is compared field-by-field to an expected object (case-insensitive, trimmed). Score is the F1 of correctly extracted fields; it passes only at a perfect F1 of 1.0."
+    }
+  ],
+  "results": [
+    {
+      "modelId": "opus-4-8",
+      "taskSlug": "sql-generation",
+      "ci": {
+        "mean": 1,
+        "lo": 1,
+        "hi": 1,
+        "stdev": 0,
+        "n": 6
+      },
+      "cases": [
+        {
+          "caseId": "sql-01",
+          "prompt": "How many customers are there in total? Return a single count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-02",
+          "prompt": "List the names of all customers from Canada.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-03",
+          "prompt": "What is the total revenue (sum of order totals) across all orders with status 'completed'?",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-04",
+          "prompt": "How many orders are there in each status? Return the status and the count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-05",
+          "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-06",
+          "prompt": "List the names of customers who have never placed an order.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        }
+      ]
+    },
+    {
+      "modelId": "opus-4-8",
+      "taskSlug": "code-explanation",
+      "ci": {
+        "mean": 1,
+        "lo": 1,
+        "hi": 1,
+        "stdev": 0,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "ce-01",
+          "prompt": "Explain what this function does:\n\nfunction f(s) { return s.split('').reverse().join(''); }",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 2/2 key concepts."
+        },
+        {
+          "caseId": "ce-02",
+          "prompt": "Explain what this function does:\n\nfunction d(fn, wait) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), wait);\n  };\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-03",
+          "prompt": "Explain what this function does:\n\nfunction b(a, x) {\n  let lo = 0, hi = a.length - 1;\n  while (lo <= hi) {\n    const m = (lo + hi) >> 1;\n    if (a[m] === x) return m;\n    if (a[m] < x) lo = m + 1; else hi = m - 1;\n  }\n  return -1;\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-04",
+          "prompt": "Explain what this function does:\n\nfunction m(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (cache.has(n)) return cache.get(n);\n    const r = fn(n);\n    cache.set(n, r);\n    return r;\n  };\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        }
+      ]
+    },
+    {
+      "modelId": "opus-4-8",
+      "taskSlug": "doc-extraction",
+      "ci": {
+        "mean": 1,
+        "lo": 1,
+        "hi": 1,
+        "stdev": 0,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "de-01",
+          "prompt": "Extract invoice_number, total, and due_date as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-02",
+          "prompt": "Extract name, company, and phone as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-03",
+          "prompt": "Extract event, date, and location as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-04",
+          "prompt": "Extract product, price, and weight as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        }
+      ]
+    },
+    {
+      "modelId": "gpt-frontier",
+      "taskSlug": "sql-generation",
+      "ci": {
+        "mean": 0.833,
+        "lo": 0.5,
+        "hi": 1,
+        "stdev": 0.408,
+        "n": 6
+      },
+      "cases": [
+        {
+          "caseId": "sql-01",
+          "prompt": "How many customers are there in total? Return a single count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-02",
+          "prompt": "List the names of all customers from Canada.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-03",
+          "prompt": "What is the total revenue (sum of order totals) across all orders with status 'completed'?",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-04",
+          "prompt": "How many orders are there in each status? Return the status and the count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-05",
+          "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+          "score": 0,
+          "passed": false,
+          "detail": "Query executed but returned different rows than the reference."
+        },
+        {
+          "caseId": "sql-06",
+          "prompt": "List the names of customers who have never placed an order.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        }
+      ]
+    },
+    {
+      "modelId": "gpt-frontier",
+      "taskSlug": "code-explanation",
+      "ci": {
+        "mean": 1,
+        "lo": 1,
+        "hi": 1,
+        "stdev": 0,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "ce-01",
+          "prompt": "Explain what this function does:\n\nfunction f(s) { return s.split('').reverse().join(''); }",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 2/2 key concepts."
+        },
+        {
+          "caseId": "ce-02",
+          "prompt": "Explain what this function does:\n\nfunction d(fn, wait) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), wait);\n  };\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-03",
+          "prompt": "Explain what this function does:\n\nfunction b(a, x) {\n  let lo = 0, hi = a.length - 1;\n  while (lo <= hi) {\n    const m = (lo + hi) >> 1;\n    if (a[m] === x) return m;\n    if (a[m] < x) lo = m + 1; else hi = m - 1;\n  }\n  return -1;\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-04",
+          "prompt": "Explain what this function does:\n\nfunction m(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (cache.has(n)) return cache.get(n);\n    const r = fn(n);\n    cache.set(n, r);\n    return r;\n  };\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        }
+      ]
+    },
+    {
+      "modelId": "gpt-frontier",
+      "taskSlug": "doc-extraction",
+      "ci": {
+        "mean": 0.917,
+        "lo": 0.75,
+        "hi": 1,
+        "stdev": 0.166,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "de-01",
+          "prompt": "Extract invoice_number, total, and due_date as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-02",
+          "prompt": "Extract name, company, and phone as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-03",
+          "prompt": "Extract event, date, and location as JSON.",
+          "score": 0.667,
+          "passed": false,
+          "detail": "Incorrect/missing fields: location (F1 0.67)."
+        },
+        {
+          "caseId": "de-04",
+          "prompt": "Extract product, price, and weight as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        }
+      ]
+    },
+    {
+      "modelId": "gemini-ultra",
+      "taskSlug": "sql-generation",
+      "ci": {
+        "mean": 0.667,
+        "lo": 0.333,
+        "hi": 1,
+        "stdev": 0.516,
+        "n": 6
+      },
+      "cases": [
+        {
+          "caseId": "sql-01",
+          "prompt": "How many customers are there in total? Return a single count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-02",
+          "prompt": "List the names of all customers from Canada.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-03",
+          "prompt": "What is the total revenue (sum of order totals) across all orders with status 'completed'?",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-04",
+          "prompt": "How many orders are there in each status? Return the status and the count.",
+          "score": 1,
+          "passed": true,
+          "detail": "Result rows exactly match the reference query."
+        },
+        {
+          "caseId": "sql-05",
+          "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+          "score": 0,
+          "passed": false,
+          "detail": "Query executed but returned different rows than the reference."
+        },
+        {
+          "caseId": "sql-06",
+          "prompt": "List the names of customers who have never placed an order.",
+          "score": 0,
+          "passed": false,
+          "detail": "Query executed but returned different rows than the reference."
+        }
+      ]
+    },
+    {
+      "modelId": "gemini-ultra",
+      "taskSlug": "code-explanation",
+      "ci": {
+        "mean": 0.917,
+        "lo": 0.75,
+        "hi": 1,
+        "stdev": 0.166,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "ce-01",
+          "prompt": "Explain what this function does:\n\nfunction f(s) { return s.split('').reverse().join(''); }",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 2/2 key concepts."
+        },
+        {
+          "caseId": "ce-02",
+          "prompt": "Explain what this function does:\n\nfunction d(fn, wait) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), wait);\n  };\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-03",
+          "prompt": "Explain what this function does:\n\nfunction b(a, x) {\n  let lo = 0, hi = a.length - 1;\n  while (lo <= hi) {\n    const m = (lo + hi) >> 1;\n    if (a[m] === x) return m;\n    if (a[m] < x) lo = m + 1; else hi = m - 1;\n  }\n  return -1;\n}",
+          "score": 1,
+          "passed": true,
+          "detail": "Covered 3/3 key concepts."
+        },
+        {
+          "caseId": "ce-04",
+          "prompt": "Explain what this function does:\n\nfunction m(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (cache.has(n)) return cache.get(n);\n    const r = fn(n);\n    cache.set(n, r);\n    return r;\n  };\n}",
+          "score": 0.667,
+          "passed": false,
+          "detail": "Missing key concepts: closure (covered 2/3)."
+        }
+      ]
+    },
+    {
+      "modelId": "gemini-ultra",
+      "taskSlug": "doc-extraction",
+      "ci": {
+        "mean": 0.834,
+        "lo": 0.667,
+        "hi": 1,
+        "stdev": 0.192,
+        "n": 4
+      },
+      "cases": [
+        {
+          "caseId": "de-01",
+          "prompt": "Extract invoice_number, total, and due_date as JSON.",
+          "score": 0.667,
+          "passed": false,
+          "detail": "Incorrect/missing fields: total (F1 0.67)."
+        },
+        {
+          "caseId": "de-02",
+          "prompt": "Extract name, company, and phone as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        },
+        {
+          "caseId": "de-03",
+          "prompt": "Extract event, date, and location as JSON.",
+          "score": 0.667,
+          "passed": false,
+          "detail": "Incorrect/missing fields: location (F1 0.67)."
+        },
+        {
+          "caseId": "de-04",
+          "prompt": "Extract product, price, and weight as JSON.",
+          "score": 1,
+          "passed": true,
+          "detail": "All 3 fields extracted correctly."
+        }
+      ]
+    }
+  ],
+  "failures": {
+    "opus-4-8": [],
+    "gpt-frontier": [
+      {
+        "taskSlug": "sql-generation",
+        "taskTitle": "SQL Generation",
+        "caseId": "sql-05",
+        "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+        "expected": "SELECT p.category, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.category ORDER BY revenue DESC LIMIT 2;",
+        "got": "SELECT p.category, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.category ORDER BY revenue ASC LIMIT 2;",
+        "analysis": "Sorted ascending instead of descending, so it returned the two *lowest*-revenue categories (Stationery, Furniture) rather than the top two. The join and aggregation were correct — only the ORDER BY direction was wrong, a subtle slip that deterministic execution catches immediately."
+      },
+      {
+        "taskSlug": "doc-extraction",
+        "taskTitle": "Document Extraction",
+        "caseId": "de-03",
+        "prompt": "Extract event, date, and location as JSON.",
+        "expected": "{\"event\":\"Spring Design Summit\",\"date\":\"May 9, 2026\",\"location\":\"Harbor Center, Seattle\"}",
+        "got": "```json\n{ \"event\": \"Spring Design Summit\", \"date\": \"May 9, 2026\", \"location\": \"Seattle\" }\n```",
+        "analysis": "Extracted only the city ('Seattle') for location, dropping the venue ('Harbor Center'). The expected value is the full 'Harbor Center, Seattle', so the field is counted wrong — a partial extraction that an exact-match grader treats as a miss."
+      }
+    ],
+    "gemini-ultra": [
+      {
+        "taskSlug": "sql-generation",
+        "taskTitle": "SQL Generation",
+        "caseId": "sql-05",
+        "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+        "expected": "SELECT p.category, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.category ORDER BY revenue DESC LIMIT 2;",
+        "got": "SELECT p.name, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.name ORDER BY revenue DESC LIMIT 2;",
+        "analysis": "Grouped by individual product (p.name) instead of product category, so it ranked products (Monitor, Desk) rather than categories. It misread the grain of the question — the answer looks plausible but aggregates at the wrong level."
+      },
+      {
+        "taskSlug": "sql-generation",
+        "taskTitle": "SQL Generation",
+        "caseId": "sql-06",
+        "prompt": "List the names of customers who have never placed an order.",
+        "expected": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders);",
+        "got": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders WHERE status = 'completed');",
+        "analysis": "Added a status='completed' filter to the subquery, answering 'customers with no completed order' rather than 'no order at all'. This wrongly includes Dmitri, whose only order is pending. A meaning-changing over-specification."
+      },
+      {
+        "taskSlug": "code-explanation",
+        "taskTitle": "Code Explanation",
+        "caseId": "ce-04",
+        "prompt": "Explain what this function does:\n\nfunction m(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (cache.has(n)) return cache.get(n);\n    const r = fn(n);\n    cache.set(n, r);\n    return r;\n  };\n}",
+        "expected": "Must mention: memo, cache, closure",
+        "got": "A memoization helper. It stores computed results in a cache (a Map) and returns the cached value whenever the same input is requested again.",
+        "analysis": "Correctly identified memoization and the cache, but never mentioned that the cache lives in a closure — the very mechanism that lets it persist across calls. Keyword coverage fell to 2/3, below the 70% bar. The explanation is right but omits the 'why it works' detail."
+      },
+      {
+        "taskSlug": "doc-extraction",
+        "taskTitle": "Document Extraction",
+        "caseId": "de-01",
+        "prompt": "Extract invoice_number, total, and due_date as JSON.",
+        "expected": "{\"invoice_number\":\"A-1042\",\"total\":\"$1,250.00\",\"due_date\":\"2026-07-15\"}",
+        "got": "{ \"invoice_number\": \"A-1042\", \"total\": \"1250.00\", \"due_date\": \"2026-07-15\" }",
+        "analysis": "Normalized the total to '1250.00', stripping the currency symbol and thousands separator the source showed ('$1,250.00'). Helpful in some pipelines, but it no longer matches the expected verbatim value, so exact-match scoring marks it wrong."
+      },
+      {
+        "taskSlug": "doc-extraction",
+        "taskTitle": "Document Extraction",
+        "caseId": "de-03",
+        "prompt": "Extract event, date, and location as JSON.",
+        "expected": "{\"event\":\"Spring Design Summit\",\"date\":\"May 9, 2026\",\"location\":\"Harbor Center, Seattle\"}",
+        "got": "```json\n{ \"event\": \"Spring Design Summit\", \"date\": \"May 9, 2026\", \"location\": \"Seattle\" }\n```",
+        "analysis": "Same partial-location error: returned 'Seattle' without the 'Harbor Center' venue. Two of three fields were correct, giving an F1 of 0.67 — below the perfect-match threshold."
+      }
+    ]
+  }
+}

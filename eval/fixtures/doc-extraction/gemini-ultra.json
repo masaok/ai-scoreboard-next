@@ -1,0 +1,12 @@
+{
+  "de-01": {
+    "output": "{ \"invoice_number\": \"A-1042\", \"total\": \"1250.00\", \"due_date\": \"2026-07-15\" }",
+    "analysis": "Normalized the total to '1250.00', stripping the currency symbol and thousands separator the source showed ('$1,250.00'). Helpful in some pipelines, but it no longer matches the expected verbatim value, so exact-match scoring marks it wrong."
+  },
+  "de-02": { "output": "{ \"name\": \"Jordan Lee\", \"company\": \"Northwind Logistics\", \"phone\": \"+1-415-555-0199\" }" },
+  "de-03": {
+    "output": "```json\n{ \"event\": \"Spring Design Summit\", \"date\": \"May 9, 2026\", \"location\": \"Seattle\" }\n```",
+    "analysis": "Same partial-location error: returned 'Seattle' without the 'Harbor Center' venue. Two of three fields were correct, giving an F1 of 0.67 — below the perfect-match threshold."
+  },
+  "de-04": { "output": "{ \"product\": \"TrailLite Tent 2P\", \"price\": \"$189.99\", \"weight\": \"1.8 kg\" }" }
+}

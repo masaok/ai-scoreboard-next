@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getRankedModels } from "@/lib/db/queries";
 
 // Regenerate the leaderboard at most once a minute (ISR) instead of on every
@@ -70,19 +71,19 @@ export default async function Home() {
             </span>
             <span className="text-sm font-semibold tracking-tight">AI Scoreboard</span>
           </div>
-          <nav className="flex items-center gap-6 text-sm text-zinc-600 dark:text-zinc-400">
-            <a href="#leaderboard" className="hidden hover:text-zinc-900 sm:inline dark:hover:text-zinc-50">
-              Leaderboard
-            </a>
-            <a href="#how" className="hidden hover:text-zinc-900 sm:inline dark:hover:text-zinc-50">
-              How it works
-            </a>
-            <a
-              href="#leaderboard"
+          <nav className="flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
+            <Link href="/results" className="hidden hover:text-zinc-900 sm:inline dark:hover:text-zinc-50">
+              Results
+            </Link>
+            <Link href="/methodology" className="hidden hover:text-zinc-900 sm:inline dark:hover:text-zinc-50">
+              Methodology
+            </Link>
+            <Link
+              href="/results"
               className="rounded-full bg-zinc-900 px-4 py-1.5 font-medium text-zinc-50 transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
             >
-              View the board
-            </a>
+              View results
+            </Link>
           </nav>
         </div>
       </header>
@@ -142,8 +143,12 @@ export default async function Home() {
         <div className="mb-8 flex flex-col gap-1">
           <h2 className="text-2xl font-semibold tracking-tight">The Scoreboard</h2>
           <p className="text-zinc-600 dark:text-zinc-400">
-            Ranked by composite rating, served live from Neon Postgres and
-            refreshed every minute.
+            Illustrative composite ratings, served from Neon Postgres. For the real,
+            reproducible task evaluations with confidence intervals, see the{" "}
+            <Link href="/results" className="font-medium text-zinc-900 underline dark:text-zinc-50">
+              results
+            </Link>
+            .
           </p>
         </div>
 

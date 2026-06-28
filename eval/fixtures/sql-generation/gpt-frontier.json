@@ -1,0 +1,11 @@
+{
+  "sql-01": { "output": "SELECT COUNT(*) FROM customers;" },
+  "sql-02": { "output": "SELECT name FROM customers WHERE country = 'Canada';" },
+  "sql-03": { "output": "SELECT SUM(total) FROM orders WHERE status = 'completed';" },
+  "sql-04": { "output": "SELECT status, COUNT(*) FROM orders GROUP BY status;" },
+  "sql-05": {
+    "output": "SELECT p.category, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.category ORDER BY revenue ASC LIMIT 2;",
+    "analysis": "Sorted ascending instead of descending, so it returned the two *lowest*-revenue categories (Stationery, Furniture) rather than the top two. The join and aggregation were correct — only the ORDER BY direction was wrong, a subtle slip that deterministic execution catches immediately."
+  },
+  "sql-06": { "output": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders);" }
+}

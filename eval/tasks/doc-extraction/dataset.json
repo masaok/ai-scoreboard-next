@@ -1,0 +1,26 @@
+[
+  {
+    "id": "de-01",
+    "prompt": "Extract invoice_number, total, and due_date as JSON.",
+    "document": "INVOICE #A-1042\nBill to: Acme Corp\nAmount due: $1,250.00\nPlease remit by 2026-07-15.",
+    "expected": { "invoice_number": "A-1042", "total": "$1,250.00", "due_date": "2026-07-15" }
+  },
+  {
+    "id": "de-02",
+    "prompt": "Extract name, company, and phone as JSON.",
+    "document": "Best regards,\nJordan Lee\nNorthwind Logistics\nDirect: +1-415-555-0199",
+    "expected": { "name": "Jordan Lee", "company": "Northwind Logistics", "phone": "+1-415-555-0199" }
+  },
+  {
+    "id": "de-03",
+    "prompt": "Extract event, date, and location as JSON.",
+    "document": "You're invited! Spring Design Summit — May 9, 2026 at the Harbor Center, Seattle.",
+    "expected": { "event": "Spring Design Summit", "date": "May 9, 2026", "location": "Harbor Center, Seattle" }
+  },
+  {
+    "id": "de-04",
+    "prompt": "Extract product, price, and weight as JSON.",
+    "document": "TrailLite Tent 2P\nNow $189.99\nPacked weight: 1.8 kg",
+    "expected": { "product": "TrailLite Tent 2P", "price": "$189.99", "weight": "1.8 kg" }
+  }
+]

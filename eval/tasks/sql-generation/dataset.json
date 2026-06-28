@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sql-01",
+    "prompt": "How many customers are there in total? Return a single count.",
+    "reference": "SELECT COUNT(*) FROM customers;"
+  },
+  {
+    "id": "sql-02",
+    "prompt": "List the names of all customers from Canada.",
+    "reference": "SELECT name FROM customers WHERE country = 'Canada';"
+  },
+  {
+    "id": "sql-03",
+    "prompt": "What is the total revenue (sum of order totals) across all orders with status 'completed'?",
+    "reference": "SELECT SUM(total) FROM orders WHERE status = 'completed';"
+  },
+  {
+    "id": "sql-04",
+    "prompt": "How many orders are there in each status? Return the status and the count.",
+    "reference": "SELECT status, COUNT(*) FROM orders GROUP BY status;"
+  },
+  {
+    "id": "sql-05",
+    "prompt": "Return the top 2 product categories by total line-item revenue (quantity times product price), highest revenue first. Return the category and its revenue.",
+    "reference": "SELECT p.category, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.category ORDER BY revenue DESC LIMIT 2;"
+  },
+  {
+    "id": "sql-06",
+    "prompt": "List the names of customers who have never placed an order.",
+    "reference": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders);"
+  }
+]

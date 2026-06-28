@@ -10,6 +10,7 @@
     "tsc": "tsc --noEmit",
     "test": "jest",
     "ci": "pnpm run tsc && pnpm run lint && pnpm run test",
+    "eval:run": "NODE_OPTIONS=--experimental-sqlite tsx eval/run.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx src/lib/db/seed.ts",
@@ -20,7 +21,8 @@
     "drizzle-orm": "^0.45.2",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

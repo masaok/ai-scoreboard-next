@@ -1,0 +1,6 @@
+{
+  "ce-01": { "output": "This function reverses a string. It splits the string into an array of characters, reverses that array, and joins it back into a single string." },
+  "ce-02": { "output": "This is a debounce utility. It delays calling `fn` until `wait` milliseconds have elapsed without another invocation, using setTimeout and clearing the pending timeout on each call." },
+  "ce-03": { "output": "A binary search over a sorted array. It discards half the search range each iteration by comparing the middle element to the target, returning the matching index or -1 if absent." },
+  "ce-04": { "output": "A memoization wrapper. It keeps a cache (a Map) inside a closure and returns the cached result for inputs it has seen before, computing fn(n) only once per input." }
+}

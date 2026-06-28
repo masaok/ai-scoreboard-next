@@ -1,0 +1,8 @@
+{
+  "sql-01": { "output": "```sql\nSELECT COUNT(*) FROM customers;\n```" },
+  "sql-02": { "output": "SELECT name FROM customers WHERE country = 'Canada';" },
+  "sql-03": { "output": "```sql\nSELECT SUM(total) FROM orders WHERE status = 'completed';\n```" },
+  "sql-04": { "output": "SELECT status, COUNT(*) FROM orders GROUP BY status;" },
+  "sql-05": { "output": "```sql\nSELECT p.category, SUM(oi.qty * p.price) AS revenue\nFROM order_items oi\nJOIN products p ON p.id = oi.product_id\nGROUP BY p.category\nORDER BY revenue DESC\nLIMIT 2;\n```" },
+  "sql-06": { "output": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders);" }
+}

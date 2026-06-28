@@ -1,14 +1,7 @@
-# Native dependencies whose install scripts must run to build their binaries.
-# pnpm 10+ blocks build scripts by default; each must be allowlisted here.
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - unrs-resolver
-# Don't treat un-built dependencies as a hard error. pnpm makes this fatal under
-# CI=true (as on Vercel); we keep it a warning so a stale build cache or the
-# machine-local rc below can't fail the install.
-strictDepBuilds: false
-# A global ~/.config/pnpm/rc (only-built-dependencies=muhammara) restricts builds
-# on this machine and trips pnpm 11's pre-run deps check. Skip that gate locally;
-# on Vercel the deps build normally from the allowlist above.
-verifyDepsBeforeRun: false
+# Approve the native dependencies whose install scripts must run to build their
+# binaries. pnpm 11 blocks build scripts by default; `allowBuilds: <pkg>: true`
+# is the canonical approval (it supersedes the older onlyBuiltDependencies list).
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

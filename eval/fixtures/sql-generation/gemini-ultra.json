@@ -1,0 +1,14 @@
+{
+  "sql-01": { "output": "SELECT COUNT(*) FROM customers;" },
+  "sql-02": { "output": "SELECT name FROM customers WHERE country = 'Canada';" },
+  "sql-03": { "output": "SELECT SUM(total) FROM orders WHERE status = 'completed';" },
+  "sql-04": { "output": "SELECT status, COUNT(*) FROM orders GROUP BY status;" },
+  "sql-05": {
+    "output": "SELECT p.name, SUM(oi.qty * p.price) AS revenue FROM order_items oi JOIN products p ON p.id = oi.product_id GROUP BY p.name ORDER BY revenue DESC LIMIT 2;",
+    "analysis": "Grouped by individual product (p.name) instead of product category, so it ranked products (Monitor, Desk) rather than categories. It misread the grain of the question — the answer looks plausible but aggregates at the wrong level."
+  },
+  "sql-06": {
+    "output": "SELECT name FROM customers WHERE id NOT IN (SELECT customer_id FROM orders WHERE status = 'completed');",
+    "analysis": "Added a status='completed' filter to the subquery, answering 'customers with no completed order' rather than 'no order at all'. This wrongly includes Dmitri, whose only order is pending. A meaning-changing over-specification."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "ce-01": { "output": "It reverses the input string by splitting it into characters, reversing the order, and joining them together again." },
+  "ce-02": { "output": "Implements debounce: it postpones running `fn` until there's a `wait`-millisecond delay with no new calls. Each call clears the previous timeout and schedules a new one." },
+  "ce-03": { "output": "Classic binary search on a sorted array — it narrows the range by half each iteration using the midpoint, returning the index of the value or -1." },
+  "ce-04": { "output": "A memoization function. It uses a Map as a cache held in the returned closure, so repeated inputs return instantly instead of recomputing." }
+}

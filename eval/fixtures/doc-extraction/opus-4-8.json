@@ -1,0 +1,6 @@
+{
+  "de-01": { "output": "```json\n{ \"invoice_number\": \"A-1042\", \"total\": \"$1,250.00\", \"due_date\": \"2026-07-15\" }\n```" },
+  "de-02": { "output": "{ \"name\": \"Jordan Lee\", \"company\": \"Northwind Logistics\", \"phone\": \"+1-415-555-0199\" }" },
+  "de-03": { "output": "```json\n{ \"event\": \"Spring Design Summit\", \"date\": \"May 9, 2026\", \"location\": \"Harbor Center, Seattle\" }\n```" },
+  "de-04": { "output": "{ \"product\": \"TrailLite Tent 2P\", \"price\": \"$189.99\", \"weight\": \"1.8 kg\" }" }
+}
